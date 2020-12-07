@@ -34,10 +34,11 @@ namespace WindowsFormsApp2
             {
                 Console.Out.WriteLine("Opening connection");
                 conn.Open();
-                using (var command = new NpgsqlCommand("INSERT INTO c.sessions (user_id, status) VALUES (@u, @s)", conn))
+                using (var command = new NpgsqlCommand("INSERT INTO c.sessions (user_id, status, type, event_id) VALUES (@u, @s, @t, 0)", conn))
                 {
                     command.Parameters.AddWithValue("u", this.user_id);
                     command.Parameters.AddWithValue("s", true);
+                    command.Parameters.AddWithValue("t", "start");
                     int nRows = command.ExecuteNonQuery();
                 }
                 conn.Close();
@@ -51,7 +52,7 @@ namespace WindowsFormsApp2
                 Console.Out.WriteLine("Opening connection");
                 conn.Open();
 
-                using (var command = new NpgsqlCommand("SELECT id, user_id, status, FROM c.sessions WHERE user_id = @u LIMIT 1 ", conn))
+                using (var command = new NpgsqlCommand("SELECT id, user_id, event_id, status FROM c.sessions WHERE user_id = @u LIMIT 1 ", conn))
                 {
                     command.Parameters.AddWithValue("n", this.user_id);
                     var reader = command.ExecuteReader();

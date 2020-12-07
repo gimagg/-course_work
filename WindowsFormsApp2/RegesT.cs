@@ -12,16 +12,19 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    public partial class Form2 : Form
+    
+    public partial class RegesT : Form
     {
-        public Form2()
+        public int user_id;
+        public RegesT(int user_id)
         {
+            this.user_id = user_id;
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 first = new Form1();
+            Main first = new Main();
             first.Show();
             this.Hide();
 
@@ -40,9 +43,22 @@ namespace WindowsFormsApp2
             string password_r = textBox4.Text;
             if (password == password_r && !string.IsNullOrEmpty(subject) && !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(password))
             {
-                var teachers = new Teachers(name, subject, password);
-                if (!teachers.CheckReg()){
-                    teachers.Regectration();
+                var teachers = new Teacher();
+                if (!teachers.CheckReg(name)){
+                    try {
+                        int id = teachers.Regectration(name, password, subject);
+                        PageTeach site = new PageTeach(id);
+                        site.Show();
+                        this.Hide();
+
+                    } catch
+                    {
+                        string message = "Проблема с базой данных";
+                        string title = "Ошибка";
+                        MessageBox.Show(message, title);
+                        Console.Out.WriteLine("notrttt");
+                    }
+                        
                 } else
                 {
                     string message = "Препод с таким именем уже есть";
@@ -56,7 +72,6 @@ namespace WindowsFormsApp2
                 string message = "Заполните все поля";
                 string title = "Ошибка";
                 MessageBox.Show(message, title);
-                Console.Out.WriteLine("notrttt");
             }
         }
 

@@ -77,42 +77,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sessions.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="classes\Checks.cs" />
+    <Compile Include="classes\Lectures.cs" />
+    <Compile Include="RegesUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RegesUser.Designer.cs">
+      <DependentUpon>RegesUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="classes\Sessions.cs" />
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="RegesT.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="RegesT.Designer.cs">
+      <DependentUpon>RegesT.cs</DependentUpon>
     </Compile>
-    <Compile Include="Teachers.cs" />
+    <Compile Include="PageTeach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PageTeach.Designer.cs">
+      <DependentUpon>PageTeach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="classes\Teacher.cs" />
+    <Compile Include="classes\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs">
+    <Compile Include="User_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User.Designer.cs">
-      <DependentUpon>User.cs</DependentUpon>
+    <Compile Include="User_Form.Designer.cs">
+      <DependentUpon>User_Form.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="RegesT.resx">
+      <DependentUpon>RegesT.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="PageTeach.resx">
+      <DependentUpon>PageTeach.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -123,8 +132,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="User.resx">
-      <DependentUpon>User.cs</DependentUpon>
+    <EmbeddedResource Include="RegesUser.resx">
+      <DependentUpon>RegesUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Form.resx">
+      <DependentUpon>User_Form.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
