@@ -9,22 +9,19 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    public class Lec
-    {
+    class Lectures : Lectures_interface
+    {   
+        private string db_string;
         public int id { get; set; }
         public string Title { get; set; }
         public string Before { get; set; }
-    }
-    class Lectures
-    {
-        private string db_string;
-        private static string Host = "localhost";
-        private static string User_r = "postgres";
-        private static string DBname = "fork";
-        private static string Password_r = "12345";
-        private static string Port = "5432";
         public Lectures()
         {
+             string Host = "localhost";
+             string User_r = "postgres";
+             string DBname = "fork";
+             string Password_r = "12345";
+             string Port = "5432";
             this.db_string =
               String.Format(    
                   "Server={0};Username={1};Database={2};Port={3};Password={4};SSLMode=Prefer",
@@ -35,27 +32,13 @@ namespace WindowsFormsApp2
                   Password_r);
 
         }
-        public string Reed()
-        {
-            string text = "";
-            return text;
-        }
         public string Db_string
         {
             get { return db_string; }
             set { db_string = value; }
         }
 
-        public void Next()
-        {
-
-        }
-
-        public void GetMaterial()
-        {
-
-
-        }
+       
 
         public int GetLecId(string before)
         {
@@ -128,14 +111,14 @@ namespace WindowsFormsApp2
             }
         }
 
-        private Lec[] add_obj_to_arr(Lec[] array,int id, string before, string title)
+        private Lectures[] add_obj_to_arr(Lectures[] array,int id, string before, string title)
         {
-            Lec[] newarray = new Lec[array.Length + 1];
+            Lectures[] newarray = new Lectures[array.Length + 1];
             for (int i = 0; i < array.Length; i++)
             {
                 newarray[i] = array[i];
             }
-            Lec elem = new Lec();
+            Lectures elem = new Lectures();
             elem.id = id;
             elem.Title = title;
             elem.Before = before;
@@ -143,13 +126,13 @@ namespace WindowsFormsApp2
             return newarray;
         }
 
-        public Lec[] arrayLecture()
+        public Lectures[] arrayLecture()
         {
             using (var conn = new NpgsqlConnection(db_string))
 
             {
                 conn.Open();
-                Lec[] arr = new Lec[0];
+                Lectures[] arr = new Lectures[0];
                 //arr[0].title = 0;
                 using (var command = new NpgsqlCommand("SELECT id ,title, before FROM c.lecture", conn))
                 {
@@ -166,12 +149,12 @@ namespace WindowsFormsApp2
                 }
             }
         }
-        public Lec[] arrayLecture(int before)
+        public Lectures[] arrayLecture(int before)
         {
             using (var conn = new NpgsqlConnection(db_string))
             {
                 conn.Open();
-                Lec[] arr = new Lec[0];
+                Lectures[] arr = new Lectures[0];
                 //arr[0].title = 0;
                 using (var command = new NpgsqlCommand("SELECT id ,title, before FROM c.lecture WHERE before <= @b", conn))
                 {
@@ -196,7 +179,7 @@ namespace WindowsFormsApp2
 
             {
                 conn.Open();
-                Lec[] arr = new Lec[0];
+                Lectures[] arr = new  Lectures[0];
                 //arr[0].title = 0;
                 using (var command = new NpgsqlCommand("UPDATE c.progress SET progress = @l WHERE user_id = @u", conn))
                 {

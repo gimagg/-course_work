@@ -79,6 +79,11 @@
   <ItemGroup>
     <Compile Include="classes\Checks.cs" />
     <Compile Include="classes\Lectures.cs" />
+    <Compile Include="interface_c\Checks._interface.cs" />
+    <Compile Include="interface_c\Client_Interface.cs" />
+    <Compile Include="interface_c\Lectures_interface.cs" />
+    <Compile Include="interface_c\Teacher_interface.cs" />
+    <Compile Include="interface_c\User_interface.cs" />
     <Compile Include="RegesUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +119,7 @@
     <Compile Include="User_Form.Designer.cs">
       <DependentUpon>User_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="classes\Сlient.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +144,7 @@
     <EmbeddedResource Include="User_Form.resx">
       <DependentUpon>User_Form.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Db_config.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

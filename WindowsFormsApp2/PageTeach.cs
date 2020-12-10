@@ -21,7 +21,7 @@ namespace WindowsFormsApp2
             InitializeComponent();
             textBox1.Text = Convert.ToString(this.user_id);
             var lec = new Lectures();
-            Lec[] arr = lec.arrayLecture();
+            Lectures[] arr = lec.arrayLecture();
             for (int i = 0; i < arr.Length; i++)
             {
                 listBox1.Items.Add(Convert.ToString(arr[i].Title));
@@ -76,7 +76,7 @@ namespace WindowsFormsApp2
                 (int lec_id, string subject, string text, string title, string username) = user.GetLecture(listBox1.SelectedItem.ToString());
                 this.lec_id = lec_id;
                 Checks checks = new Checks();
-                Che[] arr = checks.arrayCheck(this.lec_id);
+                Checks[] arr = checks.arrayCheck(this.lec_id);
                 listBox2.Items.Clear();
                 for (int i = 0; i < arr.Length; i++)
                 {
@@ -124,7 +124,8 @@ namespace WindowsFormsApp2
             string text = textBox3.Text;
 
             Checks checks = new Checks();
-            checks.CreateQwe(checks.GetLecId(listBox1.SelectedItem.ToString()), radio, text);
+            Lectures l = new Lectures();
+            checks.CreateQwe(l.GetLecId(listBox1.SelectedItem.ToString()), radio, text);
 
 
         }   

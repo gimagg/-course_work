@@ -10,87 +10,14 @@ using System.IO;
 
 namespace WindowsFormsApp2
 {
-    public class User
+    public class User : Сlient, User_interface
     {
-        private static string Host = "localhost";
-        private static string User_r = "postgres";
-        private static string DBname = "fork";
-        private static string Password_r = "12345";
-        private static string Port = "5432";
-        public string db_string = "";
-        public int user_id;
-        public string name;
-        public string subject= "user";
-        public string password;
-        public User()
+
+        public User() : base()
         {
-            db_string =
-              String.Format(
-                  "Server={0};Username={1};Database={2};Port={3};Password={4};SSLMode=Prefer",
-                  Host,
-                  User_r,
-                  DBname,
-                  Port,
-                  Password_r);
 
         }
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
-        public string Db_string
-        {
-            get { return db_string; }
-            set { db_string = value; }
-        }
-
-        public string GetHash(string input)
-        {
-            var md5 = MD5.Create();
-            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-            return Convert.ToBase64String(hash);
-        }
-
-        public bool CheckReg(string name)
-        {
-            this.name = name;
-
-            using (var conn = new NpgsqlConnection(db_string))
-
-            {
-                Console.Out.WriteLine("Opening connection");
-                conn.Open();
-
-                using (var command = new NpgsqlCommand("SELECT id, name, subject, password, role FROM c.teachers WHERE name = @n ", conn))
-                {
-                 command.Parameters.AddWithValue("n", this.name);
-                 var reader = command.ExecuteReader();  
-                 reader.Read();
-                    try
-                    {
-                        Console.Out.WriteLine(String.Format(reader["id"].ToString()));
-                        if (Convert.ToString(reader["name"].ToString()) == this.name)
-                        {
-                            return true;
-                        }
-                    } catch
-                    {
-                        Console.Out.WriteLine("not");
-                    }
-                }
-                conn.Close();
-
-            }
-            return false;
-        }
-        public int Regectration(string name,string password)
+        new public int Regectration(string name,string password)
         {
             this.name = name;
             this.subject = "user";
@@ -137,59 +64,7 @@ namespace WindowsFormsApp2
             return id;
 
         }
-        public (int, int)  LogIn(string name, string password)
-        {
-            this.name = name;
-            this.password = password;
-            using (var conn = new NpgsqlConnection(db_string))
-
-            {
-                Console.Out.WriteLine("Opening connection");
-                conn.Open();
-
-                using (var command = new NpgsqlCommand("SELECT id, name, subject, password, role FROM c.teachers WHERE name = @n ", conn))
-                {
-                    command.Parameters.AddWithValue("n", this.name);
-                    var reader = command.ExecuteReader();
-                    reader.Read();
-                    try
-                    {
-                        Console.Out.WriteLine(String.Format(reader["id"].ToString()));
-                        if (Convert.ToString(reader["password"].ToString()) == this.GetHash(this.password))
-                        {
-                            return (Convert.ToInt32(reader["id"]), Convert.ToInt32(reader["role"]));
-                        }
-                    }
-                    catch
-                    {
-                        Console.Out.WriteLine("not");
-                    }
-                }
-                conn.Close();
-
-            }
-            return (0,0);
-        }
-        public (int, string, string, string) SelectInfoUser(int user_id)
-        {
-            using (var conn = new NpgsqlConnection(db_string))
-
-            {
-                Console.Out.WriteLine("Opening connection");
-                conn.Open();
-
-                using (var command = new NpgsqlCommand("SELECT id, name, subject, password FROM c.teachers WHERE id = @i ", conn))
-                {
-                    command.Parameters.AddWithValue("i", user_id);
-                    var reader = command.ExecuteReader();
-                    reader.Read();
-                    return (Convert.ToInt32(reader["id"]), Convert.ToString(reader["name"]), Convert.ToString(reader["subject"]), Convert.ToString(reader["password"]));
-                    conn.Close();
-                }  
-            }
-
-        }
-        public (int lec_id ,string subject, string text, string title, string username) GetLecture(string title)
+       public (int lec_id ,string subject, string text, string title, string username) GetLecture(string title)
         {
 
             using (var conn = new NpgsqlConnection(db_string))

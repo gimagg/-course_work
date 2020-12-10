@@ -10,7 +10,7 @@ using Npgsql;
 namespace WindowsFormsApp2
 {
 
-    class Teacher : User
+    class Teacher : Сlient, Teacher_interface
     {
         public Teacher() :base()
         { 

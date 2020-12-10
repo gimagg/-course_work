@@ -22,7 +22,7 @@ namespace WindowsFormsApp2
             User user = new User();
             this.progress = user.GetProgress(this.user_id);
             var lec = new Lectures();
-            Lec[] arr = lec.arrayLecture(this.progress);
+            Lectures[] arr = lec.arrayLecture(this.progress);
             for (int i = 0; i < arr.Length; i++)
             {
    
@@ -65,7 +65,7 @@ namespace WindowsFormsApp2
                 this.lec_id = lec_id;
                 textBox1.Text = text;
                 Checks checks = new Checks();
-                Che[] arr = checks.arrayCheck(this.lec_id);
+                Checks[] arr = checks.arrayCheck(this.lec_id);
                 listBox2.Items.Clear();
                 for (int i = 0; i < arr.Length; i++)
                 {
@@ -95,7 +95,7 @@ namespace WindowsFormsApp2
                 }
                 //            this.progress = this.lec_id;
                 //          lec.AppProgress(this.user_id, this.lec_id);
-                Lec[] arr = lec.arrayLecture(this.progress);
+                Lectures[] arr = lec.arrayLecture(this.progress);
                 for (int i = 0; i < arr.Length; i++)
                 {
                     listBox1.Items.Add(Convert.ToString(arr[i].Title));

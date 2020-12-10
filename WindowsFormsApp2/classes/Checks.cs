@@ -8,23 +8,34 @@ using Npgsql;
 
 namespace WindowsFormsApp2
 {
-    public class Che
+    
+    class Checks : Checks_interface
     {
+        public string db_string = "";
         public int id { get; set; }
         public int lect_id { get; set; }
         public string text { get; set; }
         public int value { get; set; }
-    }
-    class Checks : Lectures
-    {
-        public Checks() : base()
+        public Checks() 
         {
-
+             string Host = "localhost";
+             string User_r = "postgres";
+             string DBname = "fork";
+             string Password_r = "12345";
+             string Port = "5432";
+             this.db_string =
+              String.Format(
+                  "Server={0};Username={1};Database={2};Port={3};Password={4};SSLMode=Prefer",
+                  Host,
+                  User_r,
+                  DBname,
+                  Port,
+                  Password_r);
         }
         public int CreateQwe(int lect_id, int value, string text)
         {
             int before_id = 0;
-            using (var conn = new NpgsqlConnection(base.Db_string))
+            using (var conn = new NpgsqlConnection(db_string))
             {
                 conn.Open();
                 try
@@ -48,14 +59,14 @@ namespace WindowsFormsApp2
             }
             return before_id;     
         }
-        private Che[] add_obj_to_arr(Che[] array, int id,int lect_id,string text,int value)
+        private Checks[] add_obj_to_arr(Checks[] array, int id,int lect_id,string text,int value)
         {
-            Che[] newarray = new Che[array.Length + 1];
+            Checks[] newarray = new Checks[array.Length + 1];
             for (int i = 0; i < array.Length; i++)
             {
                 newarray[i] = array[i];
             }
-            Che elem = new Che();
+            Checks elem = new Checks();
             elem.id = id;
             elem.lect_id = lect_id;
             elem.text = text;
@@ -63,13 +74,13 @@ namespace WindowsFormsApp2
             newarray[array.Length] = elem;
             return newarray;
         }
-        public Che[] arrayCheck(int lect_id)
+        public Checks[] arrayCheck(int lect_id)
         {
-            using (var conn = new NpgsqlConnection(base.Db_string))
+            using (var conn = new NpgsqlConnection(db_string))
 
             {
                 conn.Open();
-                Che[] arr = new Che[0];
+                Checks[] arr = new Checks[0];
                 //arr[0].title = 0;
                 using (var command = new NpgsqlCommand("SELECT id, lect_id, text, value FROM c.checks WHERE lect_id=@a ", conn))
                 {
@@ -89,7 +100,7 @@ namespace WindowsFormsApp2
         }
         public (int, int, string, int) SelectInfoCheck(int id)
         {
-            using (var conn = new NpgsqlConnection(base.Db_string))
+            using (var conn = new NpgsqlConnection(db_string))
 
             {
                 Console.Out.WriteLine("Opening connection");
